@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISON — Curated Living</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        :root { 
+            --navy: #0F1623; 
+            --cream: #F8F5F0; 
+            --brass: #C9A84C; 
+            --sage: #8FA68A; 
+            --charcoal: #2C2C2C; 
+            --mid: #6B6B6B; 
+            --light: #E8E4DF; 
+        }
+        html { 
+            scroll-behavior: smooth; 
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--cream); 
+            color: var(--charcoal); 
+            overflow-x: hidden; 
+        }
+        
+        /* ── TICKER ── */
+        .ticker-wrap { 
+            background: var(--navy); 
+            color: var(--brass); 
+            font-size: 11px; 
+            letter-spacing: .18em; 
+            text-transform: uppercase; 
+            padding: 9px 0; 
+            overflow: hidden; 
+        }
+        .ticker { 
+            display: flex; 
+            white-space: nowrap; 
+            animation: ticker 28s linear infinite; 
+        }
+        .ticker span { 
+            padding: 0 3rem; 
+        }
+        @keyframes ticker { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50%); } 
+        }
+        
+        /* ── NAV ── */
+        nav { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 20px 56px; 
+            background: var(--cream); 
+            border-bottom: 1px solid var(--light); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        .nav-logo { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 22px; 
+            font-weight: 700; 
+            letter-spacing: .06em; 
+            color: var(--navy); 
+            text-decoration: none; 
+        }
+        .nav-links { 
+            display: flex; 
+            gap: 2.4rem; 
+            list-style: none; 
+        }
+        .nav-links a { 
+            font-size: 12px; 
+            letter-spacing: .12em; 
+            text-transform: uppercase; 
+            color: var(--mid); 
+            text-decoration: none; 
+            transition: color .2s; 
+        }
+        .nav-links a:hover { 
+            color: var(--navy); 
+        }
+        .nav-right { 
+            display: flex; 
+            align-items: center; 
+            gap: 1.4rem; 
+        }
+        .cart-btn { 
+            background: var(--navy); 
+            color: var(--cream); 
+            border: none; 
+            padding: 9px 20px; 
+            font-family: 'Inter', sans-serif; 
+            font-size: 11px; 
+            letter-spacing: .14em; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            transition: background .2s; 
+        }
+        .cart-btn:hover { 
+            background: var(--brass); 
+            color: var(--navy); 
+        }
+        .cart-count { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: var(--brass); 
+            color: var(--navy); 
+            font-size: 10px; 
+            font-weight: 700; 
+            width: 18px; 
+            height: 18px; 
+            border-radius: 50%; 
+            margin-left: 6px; 
+        }
+        
+        /* ── HERO ── */
+        .hero { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            min-height: 86vh; 
+        }
+        .hero-text { 
+            background: var(--navy); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 80px 72px; 
+            position: relative; 
+        }
+        .hero-eyebrow { 
+            font-size: 10px; 
+            letter-spacing: .22em; 
+            text-transform: uppercase; 
+            color: var(--brass); 
+            margin-bottom: 28px; 
+        }
+        .hero-headline { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(42px, 5.5vw, 72px); 
+            font-weight: 600; 
+            color: var(--cream); 
+            line-height: 1.1; 
+            margin-bottom: 28px; 
+        }
+        .hero-headline em { 
+            font-style: italic; 
+            color: var(--brass); 
+        }
+        .hero-sub { 
+            font-size: 14px; 
+            line-height: 1.75; 
+            color: rgba(248,245,240,.6); 
+            max-width: 380px; 
+            margin-bottom: 44px; 
+        }
+        .hero-cta { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 12px; 
+            background: transparent; 
+            border: 1px solid var(--brass); 
+            color: var(--brass); 
+            padding: 14px 32px; 
+            font-family: 'Inter', sans-serif; 
+            font-size: 11px; 
+            letter-spacing: .16em; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            text-decoration: none; 
+            width: fit-content; 
+            transition: all .25s; 
+        }
+        .hero-cta:hover { 
+            background: var(--brass); 
+            color: var(--navy); 
+        }
+        .hero-cta svg { 
+            transition: transform .25s; 
+        }
+        .hero-cta:hover svg { 
+            transform: translateX(4px); 
+        }
+        .hero-image { 
+            background: #1e2535; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .hero-image-inner { 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(135deg, #1e2535 0%, #2a3348 40%, #1a2030 100%); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .hero-illustration { 
+            text-align: center; 
+            position: relative; 
+        }
+        
+        /* Stylised room silhouette SVG-in-CSS */
+        .room-scene { 
+            width: 340px; 
+            height: 340px; 
+            position: relative; 
+            margin: 0 auto; 
+        }
+        .hero-badge { 
+            position: absolute; 
+            bottom: 40px; 
+            right: 40px; 
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%; 
+            border: 1px solid rgba(201,168,76,.4); 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            background: rgba(15, 22, 35, 0.6);
+            backdrop-filter: blur(4px);
+            color: var(--brass);
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; }
+            nav { padding: 20px 24px; }
+            .nav-links { display: none; }
+            .hero-text { padding: 60px 24px; }
+            .room-scene { width: 260px; height: 260px; }
+            .hero-badge { bottom: 20px; right: 20px; width: 80px; height: 80px; font-size: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── TICKER ── -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>Complimentary Global Shipping on Orders Over $350</span>
+            <span>New Architectural Collection Dropping Live This Friday</span>
+            <span>Complimentary Global Shipping on Orders Over $350</span>
+            <span>New Architectural Collection Dropping Live This Friday</span>
+        </div>
+    </div>
+
+    <!-- ── NAVIGATION ── -->
+    <nav>
+        <a href="#" class="nav-logo">MAISON</a>
+        <ul class="nav-links">
+            <li><a href="#furniture">Furniture</a></li>
+            <li><a href="#lighting">Lighting</a></li>
+            <li><a href="#objects">Objects</a></li>
+            <li><a href="#journal">Journal</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="cart-btn">
+                Cart <span class="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── HERO SECTION ── -->
+    <header class="hero">
+        <div class="hero-text">
+            <span class="hero-eyebrow">A New Philosophy of Space</span>
+            <h1 class="hero-headline">Simplicity is the ultimate <em>luxury.</em></h1>
+            <p class="hero-sub">Discover our newly curated collection of minimal mid-century furniture, raw ceramic lighting, and timeless architectural objects.</p>
+            <a href="#collection" class="hero-cta">
+                Explore Collection
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 12l4-4-4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+        <div class="hero-image">
+            <div class="hero-image-inner">
+                <div class="hero-illustration">
+                    <!-- Clean minimal line-art room representation using native inline SVG -->
+                    <svg class="room-scene" viewBox="0 0 100 100" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.8">
+                        <!-- Floor line -->
+                        <line x1="10" y1="80" x2="90" y2="80" />
+                        <!-- Minimal lounge chair silhouette -->
