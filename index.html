@@ -1,1 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON — Curated Living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0F1623;
+    --cream:  #F8F5F0;
+    --brass:  #C9A84C;
+    --sage:   #8FA68A;
+    --charcoal: #2C2C2C;
+    --mid:    #6B6B6B;
+    --light:  #E8E4DF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--navy);
+    color: var(--brass);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 9px 0;
+    overflow: hidden;
+  }
+  .ticker {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker span { padding: 0 3rem; }
+  @keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 56px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.4rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+  }
+  .cart-btn {
+    background: var(--navy);
+    color: var(--cream);
+    border: none;
+    padding: 9px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .cart-btn:hover { background: var(--brass); color: var(--navy); }
+  .cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--brass);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    margin-left: 6px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 86vh;
+  }
+  .hero-text {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 72px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 28px;
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--brass);
+  }
+  .hero-sub {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(248,245,240,.6);
+    max-width: 380px;
+    margin-bottom: 44px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: 1px solid var(--brass);
+    color: var(--brass);
+    padding: 14px 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+    transition: all .25s;
+  }
+  .hero-cta:hover { background: var(--brass); color: var(--navy); }
+  .hero-cta svg { transition: transform .25s; }
+  .hero-cta:hover svg { transform: translateX(4px); }
+
+  .hero-image {
+    background: #1e2535;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-image-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e2535 0%, #2a3348 40%, #1a2030 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-illustration {
+    text-align: center;
+    position: relative;
+  }
+  /* Stylised room silhouette SVG-in-CSS */
+  .room-scene {
+    width: 340px;
+    height: 340px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-badge-label {
+    font-size: 8px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--brass);
+    line-height: 1.4;
+  }
+  .hero-badge-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--brass);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 72px 56px 36px;
+    border-bottom: 1px solid var(--light);
+    margin-bottom: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-link {
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brass);
+    text-decoration: none;
+    border-bottom: 1px solid var(--brass);
+    padding-bottom: 1px;
+  }
+
+  /* ── PRODUCT GRID ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-left: 1px solid var(--light);
+  }
+  .product-card {
+    border-right: 1px solid var(--light);
+    border-bottom: 1px solid var(--light);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .product-image {
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform .4s ease;
+  }
+  .product-card:hover .product-image { transform: scale(1.03); }
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15,22,35,0);
+    transition: background .35s;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+  }
+  .product-card:hover .product-overlay { background: rgba(15,22,35,.35); }
+  .add-overlay-btn {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .3s, transform .3s;
+    background: var(--cream);
+    color: var(--navy);
+    border: none;
+    padding: 10px 22px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+  }
+  .product-card:hover .add-overlay-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .add-overlay-btn:hover { background: var(--brass); color: var(--navy); }
+
+  .product-info {
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--light);
+  }
+  .product-category {
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 6px;
+  }
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .product-desc {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -.01em;
+  }
+  .product-price .orig {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--mid);
+    text-decoration: line-through;
+    margin-right: 6px;
+  }
+  .add-btn {
+    background: none;
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    padding: 7px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .add-btn:hover { background: var(--navy); color: var(--cream); }
+  .badge-sale {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--brass);
+    color: var(--navy);
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: 600;
+    z-index: 2;
+  }
+  .badge-new {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--sage);
+    color: white;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    font-weight: 600;
+    z-index: 2;
+  }
+
+  /* Product colour swatches */
+  .swatches {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+  .swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--light);
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .swatch:hover { border-color: var(--navy); }
+
+  /* ── BANNER STRIP ── */
+  .banner {
+    background: var(--sage);
+    padding: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--light);
+    border-bottom: 1px solid var(--light);
+  }
+  .banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--cream);
+    font-weight: 600;
+    max-width: 420px;
+    line-height: 1.25;
+  }
+  .banner h2 em { font-style: italic; }
+  .banner-form {
+    display: flex;
+    gap: 0;
+  }
+  .banner-input {
+    padding: 13px 20px;
+    border: 1px solid rgba(248,245,240,.5);
+    background: transparent;
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    width: 260px;
+    outline: none;
+  }
+  .banner-input::placeholder { color: rgba(248,245,240,.5); }
+  .banner-submit {
+    padding: 13px 24px;
+    background: var(--navy);
+    border: 1px solid var(--navy);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .banner-submit:hover { background: var(--brass); border-color: var(--brass); color: var(--navy); }
+
+  /* ── FEATURES ── */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    border-top: 1px solid var(--light);
+  }
+  .feature-item {
+    padding: 44px 36px;
+    border-right: 1px solid var(--light);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .feature-item:last-child { border-right: none; }
+  .feature-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--brass);
+  }
+  .feature-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .feature-desc {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(248,245,240,.55);
+    padding: 56px 56px 36px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(248,245,240,.1);
+    margin-bottom: 32px;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--cream);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .footer-tagline {
+    font-size: 12px;
+    line-height: 1.7;
+    max-width: 240px;
+  }
+  .footer-col-title {
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 18px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 12px;
+    color: rgba(248,245,240,.55);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+  }
+
+  /* ── CART DRAWER ── */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15,22,35,.5);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    background: var(--cream);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--light);
+  }
+  .cart-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .cart-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: var(--mid);
+    line-height: 1;
+  }
+  .cart-items { flex: 1; overflow-y: auto; padding: 20px 28px; }
+  .cart-empty {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--mid);
+    font-size: 13px;
+  }
+  .cart-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--light);
+  }
+  .cart-item-img {
+    width: 72px;
+    height: 90px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .cart-item-info { flex: 1; }
+  .cart-item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .cart-item-cat {
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 8px;
+  }
+  .cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .qty-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--light);
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+  }
+  .qty-num { font-size: 13px; font-weight: 500; min-width: 18px; text-align: center; }
+  .cart-item-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    align-self: flex-start;
+    white-space: nowrap;
+  }
+  .cart-footer {
+    padding: 20px 28px 28px;
+    border-top: 1px solid var(--light);
+  }
+  .cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .cart-subtotal-label { color: var(--mid); }
+  .cart-subtotal-amount { font-weight: 600; color: var(--navy); font-size: 18px; }
+  .checkout-btn {
+    width: 100%;
+    background: var(--navy);
+    color: var(--cream);
+    border: none;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
+    margin-bottom: 10px;
+  }
+  .checkout-btn:hover { background: var(--brass); color: var(--navy); }
+  .continue-btn {
+    width: 100%;
+    background: none;
+    border: 1px solid var(--light);
+    color: var(--mid);
+    padding: 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  .continue-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--navy);
+    color: var(--cream);
+    padding: 12px 24px;
+    font-size: 12px;
+    letter-spacing: .1em;
+    z-index: 300;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { min-height: 300px; }
+    .section-header { padding: 48px 24px 28px; }
+    .products-grid { grid-template-columns: repeat(2,1fr); }
+    .features { grid-template-columns: repeat(2,1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .banner { flex-direction: column; gap: 28px; align-items: flex-start; padding: 40px 24px; }
+    .cart-drawer { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>Free shipping on orders over $150</span>
+    <span>·</span>
+    <span>New arrivals — Summer Collection</span>
+    <span>·</span>
+    <span>Ethically sourced materials</span>
+    <span>·</span>
+    <span>30-day free returns</span>
+    <span>·</span>
+    <span>Free shipping on orders over $150</span>
+    <span>·</span>
+    <span>New arrivals — Summer Collection</span>
+    <span>·</span>
+    <span>Ethically sourced materials</span>
+    <span>·</span>
+    <span>30-day free returns</span>
+    <span>·</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">MAISON</a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="openCart()">
+      Bag <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Summer Collection 2026</p>
+    <h1 class="hero-headline">Objects that<br><em>belong</em> in your<br>world.</h1>
+    <p class="hero-sub">We find things made with intention — pieces that improve the spaces you already live in, without demanding your attention.</p>
+    <a href="#shop" class="hero-cta">
+      Browse the Collection
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Floor -->
+        <rect x="20" y="230" width="280" height="80" rx="2" fill="#1a2535"/>
+        <!-- Back wall -->
+        <rect x="20" y="60" width="280" height="175" fill="#1e2940"/>
+        <!-- Window -->
+        <rect x="180" y="80" width="100" height="120" rx="2" fill="#2d3f5c"/>
+        <line x1="230" y1="80" x2="230" y2="200" stroke="rgba(201,168,76,.3)" stroke-width="1.5"/>
+        <line x1="180" y1="140" x2="280" y2="140" stroke="rgba(201,168,76,.3)" stroke-width="1.5"/>
+        <!-- Soft light from window -->
+        <rect x="180" y="80" width="100" height="120" fill="rgba(201,168,76,.07)"/>
+        <!-- Shelf -->
+        <rect x="30" y="140" width="130" height="6" rx="1" fill="#C9A84C" opacity=".6"/>
+        <!-- Vase on shelf -->
+        <ellipse cx="80" cy="140" rx="12" ry="4" fill="#8FA68A"/>
+        <rect x="72" y="100" width="16" height="42" rx="8" fill="#8FA68A"/>
+        <ellipse cx="80" cy="100" rx="8" ry="3" fill="#7a9a76"/>
+        <!-- Plant stems -->
+        <line x1="80" y1="102" x2="68" y2="82" stroke="#6b8c66" stroke-width="1.5"/>
+        <line x1="80" y1="102" x2="84" y2="78" stroke="#6b8c66" stroke-width="1.5"/>
+        <line x1="80" y1="102" x2="92" y2="85" stroke="#6b8c66" stroke-width="1.5"/>
+        <circle cx="68" cy="80" r="7" fill="#8FA68A" opacity=".85"/>
+        <circle cx="84" cy="76" r="6" fill="#7a9a76" opacity=".85"/>
+        <circle cx="92" cy="83" r="5" fill="#6b8c66" opacity=".85"/>
+        <!-- Book on shelf -->
+        <rect x="100" y="115" width="8" height="26" rx="1" fill="#C9A84C" opacity=".55"/>
+        <rect x="110" y="118" width="8" height="23" rx="1" fill="rgba(248,245,240,.2)"/>
+        <rect x="120" y="120" width="6" height="21" rx="1" fill="#C9A84C" opacity=".3"/>
+        <!-- Sofa -->
+        <rect x="20" y="195" width="160" height="55" rx="6" fill="#2a3a55"/>
+        <rect x="20" y="185" width="160" height="18" rx="4" fill="#314464"/>
+        <rect x="20" y="185" width="14" height="65" rx="3" fill="#2a3a55"/>
+        <rect x="166" y="185" width="14" height="65" rx="3" fill="#2a3a55"/>
+        <!-- Cushions -->
+        <rect x="38" y="190" width="42" height="30" rx="5" fill="#3d5173"/>
+        <rect x="88" y="190" width="42" height="30" rx="5" fill="#C9A84C" opacity=".4"/>
+        <rect x="138" y="190" width="30" height="30" rx="5" fill="#3d5173"/>
+        <!-- Coffee table -->
+        <rect x="195" y="215" width="95" height="40" rx="2" fill="#1d2d44"/>
+        <rect x="200" y="253" width="8" height="22" rx="1" fill="#1a2840"/>
+        <rect x="277" y="253" width="8" height="22" rx="1" fill="#1a2840"/>
+        <!-- Object on table -->
+        <ellipse cx="243" cy="215" rx="18" ry="4" fill="#C9A84C" opacity=".3"/>
+        <rect x="235" y="198" width="16" height="18" rx="2" fill="#C9A84C" opacity=".45"/>
+        <!-- Rug -->
+        <ellipse cx="130" cy="248" rx="100" ry="15" fill="rgba(201,168,76,.08)" stroke="rgba(201,168,76,.18)" stroke-width="1"/>
+        <!-- Lamp -->
+        <line x1="275" y1="140" x2="275" y2="215" stroke="rgba(248,245,240,.3)" stroke-width="1.5"/>
+        <polygon points="258,140 292,140 283,110 266,110" fill="rgba(248,245,240,.15)" stroke="rgba(248,245,240,.25)" stroke-width="1"/>
+        <ellipse cx="275" cy="141" rx="17" ry="4" fill="rgba(201,168,76,.2)"/>
+        <ellipse cx="275" cy="215" rx="10" ry="3" fill="rgba(248,245,240,.1)"/>
+      </svg>
+    </div>
+    <div class="hero-badge">
+      <span class="hero-badge-number">42</span>
+      <span class="hero-badge-label">Curated<br>Pieces</span>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<div id="shop">
+  <div class="section-header">
+    <h2 class="section-title">Featured Products</h2>
+    <a href="#" class="section-link">View All</a>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Product 1 -->
+    <div class="product-card">
+      <span class="badge-new">New</span>
+      <div class="product-image" style="background:linear-gradient(145deg,#2a3a55,#1e2d42)">
+        <svg width="120" height="120" viewBox="0 0 120 120"><ellipse cx="60" cy="95" rx="35" ry="6" fill="rgba(201,168,76,.15)"/><rect x="30" y="30" width="60" height="70" rx="30" fill="#8FA68A"/><ellipse cx="60" cy="30" rx="30" ry="10" fill="#7a9a76"/><line x1="60" y1="20" x2="48" y2="4" stroke="#6b8c66" stroke-width="2"/><line x1="60" y1="20" x2="62" y2="2" stroke="#6b8c66" stroke-width="2"/><line x1="60" y1="20" x2="74" y2="6" stroke="#6b8c66" stroke-width="2"/><circle cx="48" cy="3" r="6" fill="#8FA68A"/><circle cx="62" cy="1" r="5" fill="#7a9a76"/><circle cx="74" cy="5" r="5" fill="#8FA68A"/></svg>
+        <div class="product-overlay">
+          <button class="add-overlay-btn" onclick="addToCart('Terracotta Monstera Plant', 68)">+ Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-category">Plants & Greenery</p>
+        <p class="product-name">Terracotta Monstera Plant</p>
+        <div class="swatches">
+          <div class="swatch" style="background:#8FA68A;" title="Sage"></div>
+          <div class="swatch" style="background:#C9A84C;" title="Brass pot"></div>
+          <div class="swatch" style="background:#2a3a55;" title="Navy pot"></div>
+        </div>
+        <p class="product-desc">A thriving monstera in a hand-thrown terracotta pot. Thrives in indirect light.</p>
+        <div class="product-footer">
+          <span class="product-price">$68.00</span>
+          <button class="add-btn" onclick="addToCart('Terracotta Monstera Plant', 68)">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <span class="badge-sale">Sale</span>
+      <div class="product-image" style="background:linear-gradient(145deg,#1a2535,#2a3a55)">
+        <svg width="120" height="140" viewBox="0 0 120 140"><ellipse cx="60" cy="128" rx="32" ry="5" fill="rgba(201,168,76,.15)"/><rect x="25" y="50" width="70" height="80" rx="4" fill="#C9A84C" opacity=".7"/><rect x="30" y="55" width="60" height="70" rx="3" fill="#b89440" opacity=".5"/><rect x="28" y="45" width="64" height="12" rx="3" fill="#C9A84C"/><circle cx="60" cy="36" r="12" fill="#C9A84C" opacity=".5"/><rect x="55" y="24" width="10" height="14" rx="5" fill="#C9A84C" opacity=".8"/><line x1="35" y1="75" x2="85" y2="75" stroke="rgba(248,245,240,.2)" stroke-width="1"/><line x1="35" y1="90" x2="85" y2="90" stroke="rgba(248,245,240,.2)" stroke-width="1"/><line x1="35" y1="105" x2="70" y2="105" stroke="rgba(248,245,240,.2)" stroke-width="1"/></svg>
+        <div class="product-overlay">
+          <button class="add-overlay-btn" onclick="addToCart('Brass Table Lamp', 185)">+ Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-category">Lighting</p>
+        <p class="product-name">Brushed Brass Table Lamp</p>
+        <div class="swatches">
+          <div class="swatch" style="background:#C9A84C;" title="Brass"></div>
+          <div class="swatch" style="background:#2C2C2C;" title="Matte black"></div>
+        </div>
+        <p class="product-desc">A slender brass column with a linen shade. Warm 2700K Edison bulb included.</p>
+        <div class="product-footer">
+          <span class="product-price"><span class="orig">$240</span>$185.00</span>
+          <button class="add-btn" onclick="addToCart('Brass Table Lamp', 185)">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <div class="product-image" style="background:linear-gradient(145deg,#2d3f5c,#1e2940)">
+        <svg width="130" height="120" viewBox="0 0 130 120"><ellipse cx="65" cy="112" rx="40" ry="5" fill="rgba(201,168,76,.12)"/><rect x="15" y="55" width="100" height="55" rx="20" fill="#314464"/><rect x="15" y="45" width="100" height="18" rx="5" fill="#3d5173"/><rect x="15" y="45" width="12" height="70" rx="3" fill="#314464"/><rect x="103" y="45" width="12" height="70" rx="3" fill="#314464"/><rect x="28" y="52" width="30" height="22" rx="4" fill="#3d5173"/><rect x="70" y="52" width="30" height="22" rx="4" fill="#C9A84C" opacity=".35"/></svg>
+        <div class="product-overlay">
+          <button class="add-overlay-btn" onclick="addToCart('Modular Linen Sofa', 1290)">+ Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-category">Seating</p>
+        <p class="product-name">Modular Linen Sofa</p>
+        <div class="swatches">
+          <div class="swatch" style="background:#8FA68A;" title="Sage linen"></div>
+          <div class="swatch" style="background:#F8F5F0;" title="Natural linen"></div>
+          <div class="swatch" style="background:#2C2C2C;" title="Charcoal"></div>
+          <div class="swatch" style="background:#C9A84C;" title="Ochre"></div>
+        </div>
+        <p class="product-desc">Belgian linen, solid oak legs, modular sections. Ships in 3–5 weeks.</p>
+        <div class="product-footer">
+          <span class="product-price">$1,290.00</span>
+          <button class="add-btn" onclick="addToCart('Modular Linen Sofa', 1290)">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <span class="badge-new">New</span>
+      <div class="product-image" style="background:linear-gradient(145deg,#1a2535,#253344)">
+        <svg width="110" height="130" viewBox="0 0 110 130"><ellipse cx="55" cy="122" rx="28" ry="4" fill="rgba(201,168,76,.12)"/><rect x="20" y="30" width="70" height="90" rx="3" fill="rgba(248,245,240,.12)" stroke="rgba(248,245,240,.25)" stroke-width="1"/><rect x="26" y="36" width="58" height="78" rx="2" fill="rgba(248,245,240,.06)"/><rect x="30" y="42" width="50" height="3" rx="1" fill="rgba(201,168,76,.6)"/><rect x="30" y="52" width="40" height="2" rx="1" fill="rgba(248,245,240,.3)"/><rect x="30" y="58" width="45" height="2" rx="1" fill="rgba(248,245,240,.3)"/><rect x="30" y="64" width="35" height="2" rx="1" fill="rgba(248,245,240,.3)"/><rect x="30" y="76" width="50" height="3" rx="1" fill="rgba(201,168,76,.4)"/><rect x="30" y="84" width="40" height="2" rx="1" fill="rgba(248,245,240,.3)"/><rect x="30" y="90" width="45" height="2" rx="1" fill="rgba(248,245,240,.3)"/><rect x="28" y="20" width="54" height="14" rx="2" fill="#C9A84C" opacity=".5"/></svg>
+        <div class="product-overlay">
+          <button class="add-overlay-btn" onclick="addToCart('Linen Journal Set', 42)">+ Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-category">Stationery</p>
+        <p class="product-name">Linen Journal — Set of 2</p>
+        <div class="swatches">
+          <div class="swatch" style="background:#F8F5F0;" title="Natural"></div>
+          <div class="swatch" style="background:#8FA68A;" title="Sage"></div>
+          <div class="swatch" style="background:#0F1623;" title="Midnight"></div>
+        </div>
+        <p class="product-desc">200 acid-free pages, lay-flat binding, gold foil spine. A2 and A5 sizes.</p>
+        <div class="product-footer">
+          <span class="product-price">$42.00</span>
+          <button class="add-btn" onclick="addToCart('Linen Journal Set', 42)">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="product-card">
+      <div class="product-image" style="background:linear-gradient(145deg,#253344,#1e2d42)">
+        <svg width="130" height="110" viewBox="0 0 130 110"><ellipse cx="65" cy="104" rx="38" ry="5" fill="rgba(201,168,76,.12)"/><path d="M20 80 Q65 20 110 80" stroke="#C9A84C" stroke-width="2" fill="none" opacity=".4"/><rect x="18" y="78" width="94" height="6" rx="1" fill="#C9A84C" opacity=".5"/><rect x="25" y="84" width="6" height="20" rx="1" fill="rgba(248,245,240,.2)"/><rect x="99" y="84" width="6" height="20" rx="1" fill="rgba(248,245,240,.2)"/><rect x="60" y="84" width="10" height="20" rx="1" fill="rgba(248,245,240,.15)"/><ellipse cx="65" cy="62" rx="25" ry="8" fill="rgba(201,168,76,.2)"/><circle cx="65" cy="54" r="16" fill="rgba(201,168,76,.15)" stroke="rgba(201,168,76,.35)" stroke-width="1.5"/><path d="M56 54 Q65 40 74 54 Q65 68 56 54Z" fill="#C9A84C" opacity=".45"/></svg>
+        <div class="product-overlay">
+          <button class="add-overlay-btn" onclick="addToCart('Arched Standing Mirror', 395)">+ Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-category">Mirrors & Décor</p>
+        <p class="product-name">Arched Standing Mirror</p>
+        <div class="swatches">
+          <div class="swatch" style="background:#C9A84C;" title="Brass frame"></div>
+          <div class="swatch" style="background:#2C2C2C;" title="Matte black"></div>
+          <div class="swatch" style="background:#F8F5F0;" title="White oak"></div>
+        </div>
+        <p class="product-desc">Full-length arch mirror with a hand-welded brass frame. 68" × 24".</p>
+        <div class="product-footer">
+          <span class="product-price">$395.00</span>
+          <button class="add-btn" onclick="addToCart('Arched Standing Mirror', 395)">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="product-card">
+      <span class="badge-sale">Sale</span>
+      <div class="product-image" style="background:linear-gradient(145deg,#1e2940,#253344)">
+        <svg width="120" height="110" viewBox="0 0 120 110"><ellipse cx="60" cy="103" rx="34" ry="5" fill="rgba(201,168,76,.12)"/><rect x="15" y="50" width="90" height="52" rx="3" fill="rgba(143,166,138,.25)" stroke="rgba(143,166,138,.4)" stroke-width="1"/><rect x="20" y="55" width="80" height="42" rx="2" fill="rgba(143,166,138,.15)"/><line x1="60" y1="50" x2="60" y2="102" stroke="rgba(143,166,138,.3)" stroke-width="1"/><line x1="15" y1="76" x2="105" y2="76" stroke="rgba(143,166,138,.3)" stroke-width="1"/><rect x="25" y="58" width="28" height="15" rx="2" fill="rgba(248,245,240,.1)"/><rect x="67" y="58" width="28" height="15" rx="2" fill="rgba(248,245,240,.1)"/><rect x="25" y="80" width="28" height="15" rx="2" fill="rgba(248,245,240,.1)"/><rect x="67" y="80" width="28" height="15" rx="2" fill="rgba(248,245,240,.08)"/><rect x="10" y="44" width="100" height="10" rx="2" fill="#8FA68A" opacity=".5"/></svg>
+        <div class="product-overlay">
+          <button class="add-overlay-btn" onclick="addToCart('Sage Linen Storage Box', 58)">+ Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <p class="product-category">Storage</p>
+        <p class="product-name">Sage Linen Storage Boxes</p>
+        <div class="swatches">
+          <div class="swatch" style="background:#8FA68A;" title="Sage"></div>
+          <div class="swatch" style="background:#F8F5F0;" title="Natural"></div>
+          <div class="swatch" style="background:#0F1623;" title="Midnight"></div>
+        </div>
+        <p class="product-desc">Set of 4 stackable linen boxes with cedar lining. Flat-pack for easy storage.</p>
+        <div class="product-footer">
+          <span class="product-price"><span class="orig">$75</span>$58.00</span>
+          <button class="add-btn" onclick="addToCart('Sage Linen Storage Box', 58)">Add</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BANNER -->
+<div class="banner">
+  <h2>Stay in the loop.<br><em>New pieces, first.</em></h2>
+  <div class="banner-form">
+    <input class="banner-input" type="email" placeholder="your@email.com">
+    <button class="banner-submit">Subscribe</button>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><path d="M18 4l2.5 9H30l-7.5 5.5 2.5 9L18 22l-7 5.5 2.5-9L6 13h9.5L18 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <p class="feature-title">Curated Quality</p>
+    <p class="feature-desc">Every piece is selected by our in-house team for craft, durability, and design honesty.</p>
+  </div>
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><rect x="6" y="14" width="24" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M12 14V10a6 6 0 0 1 12 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="18" cy="22" r="2" fill="currentColor"/></svg>
+    <p class="feature-title">Secure Checkout</p>
+    <p class="feature-desc">End-to-end encrypted payments via Stripe. Your details are never stored on our servers.</p>
+  </div>
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><path d="M6 18c0 6.627 5.373 12 12 12s12-5.373 12-12S24.627 6 18 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 10V6h4M10 6L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <p class="feature-title">Free Returns</p>
+    <p class="feature-desc">Not quite right? Return any item within 30 days, no questions asked, at no cost to you.</p>
+  </div>
+  <div class="feature-item">
+    <svg class="feature-icon" viewBox="0 0 36 36" fill="none"><path d="M28 24H8a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="1.5"/><path d="M12 28h12M18 24v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <p class="feature-title">Expert Support</p>
+    <p class="feature-desc">Real humans available Mon–Sat, 9am–6pm EST. We answer within one business hour.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand">MAISON</p>
+      <p class="footer-tagline">Objects made for the way you already live — not the life you imagine having. Ethically sourced, independently designed.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Shop</p>
+      <ul class="footer-links">
+        <li><a href="#">All Products</a></li>
+        <li><a href="#">Lighting</a></li>
+        <li><a href="#">Seating</a></li>
+        <li><a href="#">Storage</a></li>
+        <li><a href="#">Plants</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Company</p>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Help</p>
+      <ul class="footer-links">
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 MAISON. All rights reserved.</span>
+    <span>Privacy · Terms · Cookies</span>
+  </div>
+</footer>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <p class="cart-title">Your Bag</p>
+    <button class="cart-close" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty" id="cartEmpty">Your bag is empty.</p>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Subtotal</span>
+      <span class="cart-subtotal-amount" id="cartTotal">$0.00</span>
+    </div>
+    <button class="checkout-btn" id="checkout-main-btn" onclick="startCheckout()">Proceed to Checkout</button>
+    <button class="continue-btn" onclick="closeCart()">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const EMOJIS = {
+    'Terracotta Monstera Plant': '🌿',
+    'Brass Table Lamp': '💡',
+    'Modular Linen Sofa': '🛋️',
+    'Linen Journal Set': '📓',
+    'Arched Standing Mirror': '🪞',
+    'Sage Linen Storage Box': '📦',
+  };
+
+  let cart = [];
+
+  function openCart() {
+    document.getElementById('cartOverlay').classList.add('open');
+    document.getElementById('cartDrawer').classList.add('open');
+    renderCart();
+  }
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.getElementById('cartDrawer').classList.remove('open');
+  }
+
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) { existing.qty++; }
+    else { cart.push({ name, price, qty: 1 }); }
+    updateCount();
+    showToast(`${name} added to bag`);
+    renderCart();
+  }
+
+  function changeQty(name, delta) {
+    const item = cart.find(i => i.name === name);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+    updateCount();
+    renderCart();
+  }
+
+  function updateCount() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = total;
+  }
+
+  function renderCart() {
+    const container = document.getElementById('cartItems');
+    const empty = document.getElementById('cartEmpty');
+    const footer = document.getElementById('cartFooter');
+    const totalEl = document.getElementById('cartTotal');
+
+    if (cart.length === 0) {
+      empty.style.display = 'block';
+      footer.style.display = 'none';
+      container.innerHTML = '';
+      container.appendChild(empty);
+      return;
+    }
+
+    empty.style.display = 'none';
+    footer.style.display = 'block';
+
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    totalEl.textContent = '$' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-img" style="background:rgba(15,22,35,.07)">${EMOJIS[item.name] || '🛍️'}</div>
+        <div class="cart-item-info">
+          <p class="cart-item-name">${item.name}</p>
+          <div class="cart-item-controls">
+            <button class="qty-btn" onclick="changeQty('${item.name}', -1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
+          </div>
+        </div>
+        <span class="cart-item-price">$${(item.price * item.qty).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+      </div>
+    `).join('');
+  }
+
+  // ── STRIPE HOSTED CHECKOUT ──
+  async function startCheckout() {
+    if (cart.length === 0) return;
+    const btn = document.getElementById('checkout-main-btn');
+    btn.disabled = true;
+    btn.textContent = 'Redirecting…';
+
+    try {
+      // ▼ Replace this with your Railway URL after deploying server.js
+      const RAILWAY_URL = 'https://mison-store.vercel.app/';
+      const res = await fetch(`${RAILWAY_URL}/create-checkout-session`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        showToast('Could not start checkout. Is the server running?');
+        btn.disabled = false;
+        btn.textContent = 'Proceed to Checkout';
+      }
+    } catch (e) {
+      showToast('Server not reachable — run: node server.js');
+      btn.disabled = false;
+      btn.textContent = 'Proceed to Checkout';
+    }
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>
 
